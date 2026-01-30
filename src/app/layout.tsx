@@ -1,12 +1,10 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { AlertBanner } from '@/components/ui/AlertBanner';
-import { html } from 'framer-motion/client';
 
-// Cargamos la fuente Inter (muy legible para UI)
+// Cargamos la fuente Inter
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -21,16 +19,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={`${inter.className} bg-black text-white antialiased`}>
-        {/* El Navbar siempre visible arriba */}
-        <Navbar />
-        {/* Agregamos el Banner aquí para que se vea en todas las páginas */}
-        <div className="pt-16"> 
+      <body className={`${inter.className} bg-black text-white antialiased m-0 p-0`}>
+        
+        {/* CORRECCIÓN: Eliminé className="pt-16" de este div */}
+        <div className="w-full"> 
            <AlertBanner />
            <main className="min-h-screen">
-          {children}
+             {children}
            </main>
         </div>
+
         {/* El Footer siempre visible abajo */}
         <Footer />
       </body>

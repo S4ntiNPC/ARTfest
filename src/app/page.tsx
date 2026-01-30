@@ -22,12 +22,28 @@ export default function Home() {
   });
 
   return (
-    <div className="min-h-screen bg-black pb-24 pt-4">
+    <div className="min-h-screen bg-black pb-24">
       {/* --- HEADER --- */}
-      <section className="sticky top-0 z-40 bg-black/95 backdrop-blur-md py-4 px-4 mb-6 border-b border-white/5">
-        <h1 className="text-3xl font-extrabold tracking-tight text-white">
-          Agenda <span className="text-purple-500">2026</span>
-        </h1>
+            <section className="sticky top-0 z-40 bg-black/95 backdrop-blur-md pb-4 pt-2 px-4 mb-6 border-b border-white/5 shadow-sm shadow-black/20">
+              {/* 1. LOGO CENTRADO Y SUPERIOR */}
+              <div className="flex justify-center mb-6">
+                <div className="relative h-20 w-56 transition-transform hover:scale-105">
+                  <Image
+                    src="/logo.png"
+                    alt="ARTfest Logo"
+                    fill
+                    className="object-contain"
+                    priority
+                  />
+                </div>
+              </div>
+
+              {/* 2. TÍTULO A LA IZQUIERDA (Donde estaba el logo antes) */}
+              <div className="flex items-center justify-between mb-4">
+                <h1 className="text-3xl font-extrabold tracking-tight text-white">
+                  Agenda <span className="text-purple-500">2026</span>
+                </h1>
+              </div>
         
         {/* Selector de Días */}
         <div className="mt-4 flex gap-2 overflow-x-auto pb-2 scrollbar-hide">

@@ -39,43 +39,43 @@ const VENUES: Record<string, Venue> = {
   campusChihuahua: {
     id: 'v_campus',
     name: 'Campus Chihuahua',
-    address: 'Av. Heroico Colegio Militar 4700',
-    googleMapsLink: 'https://maps.app.goo.gl/campusLink', 
+    address: 'Calle Sexta y de la Llave #1803, Centro Campus, C. Sexta 2004, 31000 Chihuahua, Chih.',
+    googleMapsLink: 'https://maps.app.goo.gl/Q11tB85TPgwXmwKX6', 
   },
   plazaArmas: {
     id: 'v_plaza',
     name: 'Plaza de Armas',
-    address: 'Av. Independencia, Centro',
-    googleMapsLink: 'https://maps.app.goo.gl/plazaLink',
+    address: 'C. Segunda n, Centro, 31000 Chihuahua, Chih.',
+    googleMapsLink: 'https://maps.app.goo.gl/MDCW5as1gjhWibLQ7',
   },
   teatroCiudad: {
     id: 'v_teatro',
     name: 'Teatro de la Ciudad',
-    address: 'C. Ojinaga 106, Centro',
-    googleMapsLink: 'https://maps.app.goo.gl/teatroLink',
+    address: 'Calle Ojinaga 106, Zona Centro, 31000 Chihuahua, Chih.',
+    googleMapsLink: 'https://maps.app.goo.gl/i4WfJb13aXfSC7Ay6',
   },
   quintaGameros: {
     id: 'v_gameros',
     name: 'Quinta Gameros',
-    address: 'Paseo Bolívar 401',
-    googleMapsLink: 'https://maps.app.goo.gl/gamerosLink',
+    address: 'Simon, Av. Paseo Bolívar 401, Zona Centro, 31000 Chihuahua, Chih.',
+    googleMapsLink: 'https://maps.app.goo.gl/CeVCyPZSEYAyGMo4A',
   },
   casaSebastian: {
     id: 'v_sebastian',
     name: 'Casa Sebastián',
-    address: 'Av. Juárez 601',
-    googleMapsLink: 'https://maps.app.goo.gl/sebastianLink',
+    address: 'Av. Benito Juárez 601, Parque Rotario, 31000 Chihuahua, Chih.',
+    googleMapsLink: 'https://maps.app.goo.gl/DQQrY59y9Fn4hE8q6',
   },
   qualityInn: {
     id: 'v_quality',
     name: 'Hotel Quality Inn',
-    address: 'Victoria 409',
-    googleMapsLink: 'https://maps.app.goo.gl/qualityLink',
+    address: 'Calle Guadalupe Victoria 409, Centro, 31000 Chihuahua, Chih.',
+    googleMapsLink: 'https://maps.app.goo.gl/kjyTMgDHdSeM7DxV8',
   },
   planB: {
     id: 'v_planb',
     name: 'Plan B',
-    address: 'Av. Tecnológico', // Ajustar dirección si es necesario
+    address: 'Av. Tecnológico¿?', // Ajustar dirección si es necesario
     googleMapsLink: 'https://maps.google.com/?q=Casa+Sebastian7',
   },
   tbd: {

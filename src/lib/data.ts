@@ -1,5 +1,5 @@
-// Tipos de Eventos
-export type EventType = 'taller' | 'seleccion' | 'comida' | 'general';
+// --- TIPOS ---
+export type EventType = 'taller' | 'seleccion' | 'comida' | 'general' | 'track_container';
 
 export interface Facilitator {
   id: string;
@@ -24,90 +24,408 @@ export interface FestivalEvent {
   startTime: string;
   endTime: string;
   type: EventType;
-  venue: Venue;
+  venue?: Venue;
   facilitator?: Facilitator;
+  // Propiedad para bloques con rutas (Tracks)
+  tracks?: {
+    trackName: string;
+    trackColor: string; // 'blue' | 'pink'
+    events: FestivalEvent[];
+  }[];
 }
 
-// --- DATOS REALES (Ubicaciones de Chihuahua) ---
-
+// --- SEDES ---
 const VENUES: Record<string, Venue> = {
-  casaSebastian: {
-    id: 'v1',
-    name: 'Casa Sebastián (Museo)',
-    address: 'Av. Juárez 601, Centro',
-    // Link directo a la búsqueda exacta en Maps
-    googleMapsLink: 'https://www.google.com/maps/search/?api=1&query=Museo+Sebastian+Casa+Siglo+XIX+Chihuahua',
+  campusChihuahua: {
+    id: 'v_campus',
+    name: 'Campus Chihuahua',
+    address: 'Av. Heroico Colegio Militar 4700',
+    googleMapsLink: 'https://maps.app.goo.gl/campusLink', 
+  },
+  plazaArmas: {
+    id: 'v_plaza',
+    name: 'Plaza de Armas',
+    address: 'Av. Independencia, Centro',
+    googleMapsLink: 'https://maps.app.goo.gl/plazaLink',
   },
   teatroCiudad: {
-    id: 'v2',
+    id: 'v_teatro',
     name: 'Teatro de la Ciudad',
-    address: 'Calle Ojinaga 106, Centro',
-    googleMapsLink: 'https://www.google.com/maps/search/?api=1&query=Teatro+de+la+Ciudad+Chihuahua',
+    address: 'C. Ojinaga 106, Centro',
+    googleMapsLink: 'https://maps.app.goo.gl/teatroLink',
   },
-  plazaPrincipal: {
-    id: 'v3',
-    name: 'Plaza de Armas',
-    address: 'Av. Independencia y Libertad',
-    googleMapsLink: 'https://www.google.com/maps/search/?api=1&query=Plaza+de+Armas+Chihuahua',
+  quintaGameros: {
+    id: 'v_gameros',
+    name: 'Quinta Gameros',
+    address: 'Paseo Bolívar 401',
+    googleMapsLink: 'https://maps.app.goo.gl/gamerosLink',
+  },
+  casaSebastian: {
+    id: 'v_sebastian',
+    name: 'Casa Sebastián',
+    address: 'Av. Juárez 601',
+    googleMapsLink: 'https://maps.app.goo.gl/sebastianLink',
+  },
+  qualityInn: {
+    id: 'v_quality',
+    name: 'Hotel Quality Inn',
+    address: 'Victoria 409',
+    googleMapsLink: 'https://maps.app.goo.gl/qualityLink',
+  },
+  planB: {
+    id: 'v_planb',
+    name: 'Plan B',
+    address: 'Av. Tecnológico', // Ajustar dirección si es necesario
+    googleMapsLink: 'https://maps.google.com/?q=Casa+Sebastian7',
+  },
+  tbd: {
+    id: 'v_tbd',
+    name: 'Sede por definir',
+    address: 'Ubicación pendiente',
+    googleMapsLink: '#',
   }
 };
 
+// --- AGENDA COMPLETA ---
 export const SCHEDULE: FestivalEvent[] = [
+  
+  // ==========================================
+  // DÍA 15 DE FEBRERO (Domingo)
+  // ==========================================
   {
-    id: 'e1',
-    title: 'Inauguración ARTfest 2026',
+    id: '15_montaje',
+    title: 'Montaje General',
+    description: 'Preparativos y logística en explanada.',
     day: '15',
-    startTime: '09:00',
-    endTime: '10:30',
+    startTime: '08:00',
+    endTime: '14:30',
     type: 'general',
-    venue: VENUES.plazaPrincipal,
-    description: 'Ceremonia de apertura con autoridades y presentación de disciplinas.'
+    venue: VENUES.campusChihuahua,
   },
   {
-    id: 'e2',
-    title: 'Taller de Fotografía Urbana',
+    id: '15_apertura',
+    title: 'Apertura de Campus a Delegaciones',
+    description: 'Bienvenida a participantes foráneos.',
     day: '15',
-    startTime: '11:00',
-    endTime: '13:00',
-    type: 'taller',
-    venue: VENUES.casaSebastian,
-    facilitator: {
-      id: 'f1',
-      name: 'Ana Lens',
-      bio: 'Fotógrafa documental con 10 años de experiencia.',
-      instagramUrl: 'https://instagram.com',
-      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80'
-    }
+    startTime: '15:00',
+    endTime: '15:30',
+    type: 'comida', 
+    venue: VENUES.campusChihuahua,
   },
   {
-    id: 'e3',
-    title: 'Eliminatoria: Danza Contemporánea',
+    id: '15_feria',
+    title: 'Feria Vaquera & Entrega de Kits',
     day: '15',
-    startTime: '11:00',
-    endTime: '14:00',
+    startTime: '15:30',
+    endTime: '17:30',
+    type: 'general', 
+    venue: VENUES.campusChihuahua,
+  },
+  {
+    id: '15_inauguracion',
+    title: 'INAUGURACIÓN OFICIAL',
+    day: '15',
+    startTime: '17:30',
+    endTime: '20:00',
+    type: 'general', 
+    venue: VENUES.plazaArmas,
+  },
+  {
+    id: '15_cierre',
+    title: 'Cierre del día / Salida',
+    day: '15',
+    startTime: '20:00',
+    endTime: '20:30',
+    type: 'comida', 
+    venue: VENUES.campusChihuahua,
+  },
+
+  // ==========================================
+  // DÍA 16 DE FEBRERO (Lunes)
+  // ==========================================
+  {
+    id: '16_registro',
+    title: 'Registro General',
+    day: '16',
+    startTime: '08:00',
+    endTime: '08:30',
+    type: 'general',
+    venue: VENUES.teatroCiudad,
+  },
+  {
+    id: '16_masterclass',
+    title: 'Masterclass IA',
+    day: '16',
+    startTime: '08:30',
+    endTime: '09:00',
     type: 'seleccion',
     venue: VENUES.teatroCiudad,
-    description: 'Primera ronda de selecciones para la categoría de Danza.'
   },
   {
-    id: 'e4',
-    title: 'Hora de Comida - Food Trucks',
-    day: '15',
-    startTime: '14:00',
-    endTime: '16:00',
-    type: 'comida',
-    venue: VENUES.plazaPrincipal,
-    description: 'Zona de comida habilitada para participantes.'
+    id: '16_panel',
+    title: 'Panel IA',
+    day: '16',
+    startTime: '09:00',
+    endTime: '10:00',
+    type: 'seleccion',
+    venue: VENUES.teatroCiudad,
   },
-  // Evento extra para probar el día 16
   {
-    id: 'e5',
-    title: 'Finales de Storytelling',
+    id: '16_break_morning',
+    title: 'Break + Traslados',
     day: '16',
     startTime: '10:00',
-    endTime: '12:00',
-    type: 'seleccion',
-    venue: VENUES.teatroCiudad,
-    description: 'Los mejores narradores compiten por el premio mayor.'
+    endTime: '10:30',
+    type: 'general',
   },
+
+  // --- TRACKS DÍA 16 (CORREGIDO: TALLERES SEPARADOS) ---
+  {
+    id: '16_bloque_dividido',
+    title: 'División de Grupos (Día 16)',
+    day: '16',
+    startTime: '10:30', 
+    endTime: '17:30',   
+    type: 'track_container', 
+    description: 'Selecciona tu grupo:',
+    tracks: [
+      {
+        trackName: 'Selección Canto',
+        trackColor: 'pink',
+        events: [
+          { id: 'c1', title: 'Selección de Canto', startTime: '10:30', endTime: '13:30', day: '16', type: 'seleccion', venue: VENUES.teatroCiudad },
+          { id: 'c2', title: 'Comida', startTime: '13:30', endTime: '14:00', day: '16', type: 'comida', venue: VENUES.teatroCiudad },
+          { id: 'c3', title: 'Movimiento a Ensayos', startTime: '14:00', endTime: '14:30', day: '16', type: 'general' },
+          { id: 'c4', title: 'Ensayo General', startTime: '14:30', endTime: '16:30', day: '16', type: 'general', venue: VENUES.teatroCiudad },
+          { id: 'c5', title: 'Preparación para Show', startTime: '16:30', endTime: '17:30', day: '16', type: 'general', venue: VENUES.teatroCiudad },
+        ]
+      },
+      {
+        trackName: 'Talleres',
+        trackColor: 'blue',
+        events: [
+          // --- BLOQUE 1 (10:30 - 11:30) ---
+          { id: 't16_1_foto', title: 'Taller de Fotografía', startTime: '10:30', endTime: '11:30', day: '16', type: 'taller', venue: VENUES.quintaGameros },
+          { id: 't16_1_story', title: 'Taller de StoryTelling', startTime: '10:30', endTime: '11:30', day: '16', type: 'taller', venue: VENUES.casaSebastian },
+          { id: 't16_1_danza', title: 'Taller de Danza', startTime: '10:30', endTime: '11:30', day: '16', type: 'taller', venue: VENUES.qualityInn },
+          { id: 't16_1_urbano', title: 'Taller de Arte Urbano', startTime: '10:30', endTime: '11:30', day: '16', type: 'taller', venue: VENUES.campusChihuahua },
+          
+          // Break
+          { id: 't16_br', title: 'Break: Hidratación', startTime: '11:30', endTime: '12:00', day: '16', type: 'general' },
+          
+          // --- BLOQUE 2 (12:00 - 13:30) ---
+          { id: 't16_2_foto', title: 'Taller de Fotografía', startTime: '12:00', endTime: '13:30', day: '16', type: 'taller', venue: VENUES.quintaGameros },
+          { id: 't16_2_story', title: 'Taller de StoryTelling', startTime: '12:00', endTime: '13:30', day: '16', type: 'taller', venue: VENUES.casaSebastian },
+          { id: 't16_2_danza', title: 'Taller de Danza', startTime: '12:00', endTime: '13:30', day: '16', type: 'taller', venue: VENUES.qualityInn },
+          { id: 't16_2_urbano', title: 'Taller de Arte Urbano', startTime: '12:00', endTime: '13:30', day: '16', type: 'taller', venue: VENUES.campusChihuahua },
+          
+          // Comida
+          { id: 't16_co', title: 'Comida', startTime: '13:30', endTime: '14:30', day: '16', type: 'comida' },
+          
+          // --- BLOQUE 3 (14:30 - 16:30) ---
+          { id: 't16_3_foto', title: 'Taller de Fotografía', startTime: '14:30', endTime: '16:30', day: '16', type: 'taller', venue: VENUES.quintaGameros },
+          { id: 't16_3_story', title: 'Taller de StoryTelling', startTime: '14:30', endTime: '16:30', day: '16', type: 'taller', venue: VENUES.casaSebastian },
+          { id: 't16_3_danza', title: 'Taller de Danza', startTime: '14:30', endTime: '16:30', day: '16', type: 'taller', venue: VENUES.qualityInn },
+          { id: 't16_3_urbano', title: 'Taller de Arte Urbano', startTime: '14:30', endTime: '16:30', day: '16', type: 'taller', venue: VENUES.campusChihuahua },
+          // Adicionales según imagen
+          { id: 't16_3_canto', title: 'Canto (No finalistas)', startTime: '14:30', endTime: '16:30', day: '16', type: 'taller', venue: VENUES.campusChihuahua },
+          { id: 't16_3_ensamble', title: 'Ensamble (No finalistas)', startTime: '14:30', endTime: '16:30', day: '16', type: 'taller', venue: VENUES.planB },
+
+          // Traslado
+          { id: 't16_tr', title: 'Traslado a Teatro', startTime: '16:30', endTime: '17:30', day: '16', type: 'general', venue: VENUES.teatroCiudad },
+        ]
+      }
+    ]
+  },
+  {
+    id: '16_showcase',
+    title: 'Showcase Canto y Ensamble',
+    day: '16',
+    startTime: '17:30',
+    endTime: '20:00',
+    type: 'general',
+    venue: VENUES.teatroCiudad,
+  },
+  {
+    id: '16_cierre',
+    title: 'Cierre del día',
+    day: '16',
+    startTime: '20:00',
+    endTime: '20:30',
+    type: 'comida',
+    venue: VENUES.teatroCiudad,
+  },
+
+  // ==========================================
+  // DÍA 17 DE FEBRERO (Martes)
+  // ==========================================
+  {
+    id: '17_llegada',
+    title: 'Llegada a Campus',
+    day: '17',
+    startTime: '07:30',
+    endTime: '08:00',
+    type: 'general',
+    venue: VENUES.campusChihuahua,
+  },
+  {
+    id: '17_division',
+    title: 'División por disciplina',
+    day: '17',
+    startTime: '08:00',
+    endTime: '08:30',
+    type: 'general',
+    venue: VENUES.campusChihuahua,
+  },
+  {
+    id: '17_traslado',
+    title: 'Traslado general a sedes',
+    day: '17',
+    startTime: '08:30',
+    endTime: '09:00',
+    type: 'general',
+  },
+  // Bloque previo
+  {
+    id: '17_pre_foto',
+    title: 'Taller de Fotografía',
+    day: '17',
+    startTime: '09:00',
+    endTime: '10:00',
+    type: 'taller',
+    venue: VENUES.casaSebastian,
+  },
+  {
+    id: '17_pre_story',
+    title: 'Taller de StoryTelling',
+    day: '17',
+    startTime: '09:00',
+    endTime: '10:00',
+    type: 'taller',
+    venue: VENUES.tbd,
+  },
+  {
+    id: '17_pre_canto',
+    title: 'Taller de Canto',
+    day: '17',
+    startTime: '09:00',
+    endTime: '10:00',
+    type: 'taller',
+    venue: VENUES.campusChihuahua,
+  },
+  {
+    id: '17_pre_ensamble',
+    title: 'Taller de Ensamble',
+    day: '17',
+    startTime: '09:00',
+    endTime: '10:00',
+    type: 'taller',
+    venue: VENUES.campusChihuahua,
+  },
+  {
+    id: '17_pre_urbano',
+    title: 'Taller de Arte Urbano',
+    day: '17',
+    startTime: '09:00',
+    endTime: '10:00',
+    type: 'taller',
+    venue: VENUES.campusChihuahua,
+  },
+
+  {
+    id: '17_break_pre',
+    title: 'Break',
+    day: '17',
+    startTime: '10:00',
+    endTime: '10:30',
+    type: 'general',
+  },
+
+  // --- TRACKS DÍA 17 ---
+  {
+    id: '17_bloque_dividido',
+    title: 'División de Grupos (Día 17)',
+    day: '17',
+    startTime: '10:30', 
+    endTime: '17:30',   
+    type: 'track_container', 
+    description: 'Selecciona tu grupo (Danza o Talleres):',
+    tracks: [
+      {
+        trackName: 'Selección de Danza',
+        trackColor: 'pink',
+        events: [
+          { id: 'd1', title: 'Selección de Danza', startTime: '10:30', endTime: '13:30', day: '17', type: 'seleccion', venue: VENUES.tbd },
+          { id: 'd2', title: 'Comida por Sede', startTime: '13:30', endTime: '14:00', day: '17', type: 'comida' },
+          { id: 'd3', title: 'Movimiento a Ensayo/Taller', startTime: '14:00', endTime: '14:30', day: '17', type: 'general' },
+          { id: 'd4', title: 'Ensayo General de Baile', startTime: '14:30', endTime: '16:30', day: '17', type: 'seleccion', venue: VENUES.tbd },
+          { id: 'd5', title: 'Preparación para Show', startTime: '16:30', endTime: '17:30', day: '17', type: 'general' },
+        ]
+      },
+      {
+        trackName: 'Talleres Simultáneos',
+        trackColor: 'blue',
+        events: [
+          // Bloque 1
+          { id: 't17_1_foto', title: 'Taller de Fotografía', startTime: '10:30', endTime: '13:30', day: '17', type: 'taller', venue: VENUES.casaSebastian },
+          { id: 't17_1_story', title: 'Taller de StoryTelling', startTime: '10:30', endTime: '13:30', day: '17', type: 'taller', venue: VENUES.tbd },
+          { id: 't17_1_canto', title: 'Taller de Canto', startTime: '10:30', endTime: '13:30', day: '17', type: 'taller', venue: VENUES.campusChihuahua },
+          { id: 't17_1_urb', title: 'Taller de Arte Urbano', startTime: '10:30', endTime: '13:30', day: '17', type: 'taller', venue: VENUES.campusChihuahua },
+          
+          { id: 't17_comida', title: 'Comida', startTime: '13:30', endTime: '14:30', day: '17', type: 'comida' },
+          
+          // Bloque 2
+          { id: 't17_2_foto', title: 'Taller de Fotografía', startTime: '14:30', endTime: '16:30', day: '17', type: 'taller', venue: VENUES.casaSebastian },
+          { id: 't17_2_story', title: 'Taller de StoryTelling', startTime: '14:30', endTime: '16:30', day: '17', type: 'taller', venue: VENUES.tbd },
+          { id: 't17_2_canto', title: 'Taller de Canto', startTime: '14:30', endTime: '16:30', day: '17', type: 'taller', venue: VENUES.campusChihuahua },
+          { id: 't17_2_urb', title: 'Taller de Arte Urbano', startTime: '14:30', endTime: '16:30', day: '17', type: 'taller', venue: VENUES.campusChihuahua },
+          
+          { id: 't17_traslado', title: 'Traslado a Teatro', startTime: '16:30', endTime: '17:30', day: '17', type: 'general', venue: VENUES.teatroCiudad },
+        ]
+      }
+    ]
+  },
+  
+  // CIERRE DÍA 17
+  {
+    id: '17_showcase',
+    title: 'Showcase Baile',
+    day: '17',
+    startTime: '17:30',
+    endTime: '20:00',
+    type: 'general',
+    venue: VENUES.teatroCiudad,
+  },
+  {
+    id: '17_cierre',
+    title: 'Cierre de día / Salida',
+    day: '17',
+    startTime: '20:00',
+    endTime: '20:30',
+    type: 'comida',
+    venue: VENUES.teatroCiudad,
+  },
+
+  // ==========================================
+  // DÍA 18 DE FEBRERO (Miércoles)
+  // ==========================================
+  {
+    id: '18_llegada',
+    title: 'Llegada a Teatro',
+    day: '18',
+    startTime: '08:30',
+    endTime: '09:00',
+    type: 'general',
+    venue: VENUES.teatroCiudad,
+  },
+  {
+    id: '18_gala',
+    title: 'GALA DE PREMIACIÓN',
+    description: 'Ceremonia de clausura y entrega de premios ARTfest 2026.',
+    day: '18',
+    startTime: '09:00',
+    endTime: '13:30',
+    type: 'general',
+    venue: VENUES.teatroCiudad,
+  }
 ];

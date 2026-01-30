@@ -1,45 +1,63 @@
 'use server';
 
-import { GoogleGenerativeAI } from '@google/generative-ai';
-
 export async function getSmartWeatherRecommendation() {
   try {
-    // 1. Obtener clima de Chihuahua (Coordenadas aproximadas o por ciudad)
+    // ---------------------------------------------------------
+    // 1. Obtener clima de Chihuahua (OpenWeatherMap)
+    // ---------------------------------------------------------
     const weatherRes = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=Chihuahua,MX&units=metric&lang=es&appid=${process.env.OPENWEATHER_API_KEY}`,
-      { cache: 'no-store' } // Importante: No guardar caché para que sea real
+      { cache: 'no-store' }
     );
-    
-    if (!weatherRes.ok) {
-      console.log("🔥 Estatus HTTP:", weatherRes.status); 
-      const errorBody = await weatherRes.text();
-      console.log("🔥 Mensaje API:", errorBody);
-      
-      throw new Error('Error clima'); // Esto lanza el error que ves ahora
-    }
 
-    if (!weatherRes.ok) throw new Error('Error clima');
+    if (!weatherRes.ok) {
+      console.error("Error OpenWeather:", weatherRes.status);
+      throw new Error('Error al obtener clima');
+    }
     
     const weatherData = await weatherRes.json();
     const temp = Math.round(weatherData.main.temp);
     const desc = weatherData.weather[0].description;
 
-    // 2. Conectar con Gemini
-    const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API_KEY || '');
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
-
-    // 3. Crear el Prompt para la IA
+    // ---------------------------------------------------------
+    // 2. Conectar con Gemini (Modo Manual / REST API)
+    // ---------------------------------------------------------
+    const apiKey = process.env.GOOGLE_GEMINI_API_KEY;
+    
+    // Prompt
     const prompt = `
       Actúa como un asistente de estilo experto y breve para un festival de arte al aire libre.
       El clima actual en Chihuahua es: ${temp}°C y ${desc}.
-      
-      Dame una recomendación de vestimenta MUY BREVE (máximo 15 palabras) con un tono amigable y útil.
-      Ejemplo: "Hace frío, lleva tu chamarra favorita y bufanda."
-      No uses saludos, ve directo al grano.
+      Dame una recomendación de vestimenta MUY BREVE (máximo 15 palabras).
+      Ejemplo: "Hace frío, lleva tu chamarra favorita."
+      Sin saludos.
     `;
 
-    const result = await model.generateContent(prompt);
-    const recommendation = result.response.text();
+    // URL directa a la API (Modelo Gemini 1.5 Flash)
+    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-preview:generateContent?key=${apiKey}`;
+
+    const geminiRes = await fetch(geminiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        contents: [{
+          parts: [{ text: prompt }]
+        }]
+      })
+    });
+
+    if (!geminiRes.ok) {
+      const errorDetails = await geminiRes.text();
+      console.error("🔴 Error Gemini API:", errorDetails);
+      throw new Error('Error al conectar con Gemini');
+    }
+
+    const geminiData = await geminiRes.json();
+    
+    // Extraemos la respuesta del JSON complejo de Google
+    const recommendation = geminiData.candidates?.[0]?.content?.parts?.[0]?.text || "¡Disfruta el evento!";
 
     return {
       success: true,
@@ -49,13 +67,13 @@ export async function getSmartWeatherRecommendation() {
     };
 
   } catch (error) {
-    console.error("🔴 ERROR CRÍTICO EN SERVER ACTION:");
-    console.error(error); 
+    console.error("Error General:", error);
+    // Fallback para que no truene la web
     return {
       success: false,
       temp: 0,
       desc: 'No disponible',
-      recommendation: 'Revisa el pronóstico local antes de salir.',
+      recommendation: 'Lleva ropa cómoda y revisa el pronóstico.',
     };
   }
 }

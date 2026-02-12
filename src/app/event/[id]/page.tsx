@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { SCHEDULE } from '@/lib/data';
-import { MapPin, Clock, ArrowLeft, Instagram, Calendar } from 'lucide-react';
+import { MapPin, Clock, ChevronDown, ChevronUp, Utensils, ArrowLeft, Calendar, Users, Instagram } from 'lucide-react';
 
 export function generateStaticParams() {
   return SCHEDULE.map((event) => ({

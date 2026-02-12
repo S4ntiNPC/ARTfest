@@ -19,7 +19,6 @@ const config: Config = {
           gray: '#27272a',   // Tarjetas
         }
       },
-      // ... (mantén tus animaciones si las tenías)
     },
   },
   plugins: [],

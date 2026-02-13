@@ -2,19 +2,18 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { SCHEDULE, FestivalEvent } from '@/lib/data';
 import { MapPin, Clock, ChevronDown, ChevronUp, Utensils, ArrowLeft, Calendar, Users, Instagram } from 'lucide-react';
 import clsx from 'clsx';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// --- DATOS DE COMIDA (Puedes moverlos a @/lib/data si prefieres) ---
+// --- DATOS DE COMIDA ---
 const FOOD_LOCATIONS = [
-  { id: 1, name: "Campus / Quinta Gameros", image: "/images/campus.jpg", pdfUrl: "https://utmedu-my.sharepoint.com/personal/ivan_vr_tecmilenio_mx/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fivan%5Fvr%5Ftecmilenio%5Fmx%2FDocuments%2FARTFEST%2FMen%C3%BA%20Campus%20Chihuahua%20%2D%20Quinta%20Gameros%2Epdf&parent=%2Fpersonal%2Fivan%5Fvr%5Ftecmilenio%5Fmx%2FDocuments%2FARTFEST&ga=1" },
-  { id: 2, name: "Teatro de la Ciudad", image: "/images/teatro.jpg", pdfUrl: "https://utmedu-my.sharepoint.com/personal/ivan_vr_tecmilenio_mx/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fivan%5Fvr%5Ftecmilenio%5Fmx%2FDocuments%2FARTFEST%2FMen%C3%BA%20Teatro%20de%20la%20Ciudad%2Epdf&parent=%2Fpersonal%2Fivan%5Fvr%5Ftecmilenio%5Fmx%2FDocuments%2FARTFEST&ga=1" },
-  { id: 3, name: "Museo San Sebastián", image: "/images/museo.jpg", pdfUrl: "https://utmedu-my.sharepoint.com/personal/ivan_vr_tecmilenio_mx/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fivan%5Fvr%5Ftecmilenio%5Fmx%2FDocuments%2FARTFEST%2FMen%C3%BA%20Museo%20San%20Sebasti%C3%A1n%2Epdf&parent=%2Fpersonal%2Fivan%5Fvr%5Ftecmilenio%5Fmx%2FDocuments%2FARTFEST&ga=1" },
-  { id: 4, name: "Hotel Quality Inn", image: "/images/quality.jpg", pdfUrl: "https://utmedu-my.sharepoint.com/personal/ivan_vr_tecmilenio_mx/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fivan%5Fvr%5Ftecmilenio%5Fmx%2FDocuments%2FPDFs+de+Men%C3%BAs+de+ARTfest+VII+%C3%A9xito!-Hotel+Quality+Inn.pdf&parent=%2FPersonalized+SharePoint+URLs&ga=1" },
-  { id: 5, name: "Plan B", image: "/images/planb.jpg", pdfUrl: "https://utmedu-my.sharepoint.com/personal/ivan_vr_tecmilenio_mx/_layouts/15/onedrive.aspx?id=%2FPublicationFiles-Plan+B.pdf&parent=%2FPublicationFiles-Plan+B.pdf&ga=1" }
+  { id: 1, name: "Campus / Quinta Gameros", image: "/images/campus.jpg", pdfUrl: "https://utmedu-my.sharepoint.com/:b:/g/personal/ivan_vr_tecmilenio_mx/IQAoRojQu0WjRJ_dWiHvR4UnAa79BMiLw_4gXYkg6GjZdJ4?e=wlPqu0" },
+  { id: 2, name: "Teatro de la Ciudad", image: "/images/teatro.jpg", pdfUrl: "https://utmedu-my.sharepoint.com/:b:/g/personal/ivan_vr_tecmilenio_mx/IQDeYeuA--XKSL400kxdQsfYAZiKf1SW1tp9_DbKEbo7yPU?e=Pqg0sK" },
+  { id: 3, name: "Museo San Sebastián", image: "/images/museo.jpg", pdfUrl: "https://utmedu-my.sharepoint.com/:b:/g/personal/ivan_vr_tecmilenio_mx/IQB7YzGJWKaKRppeOLlqZk4TARahlMP8Y6AxtMMHY2s_Mh8?e=BVjJ8b" },
+  { id: 4, name: "Hotel Quality Inn", image: "/images/quality.jpg", pdfUrl: "https://utmedu-my.sharepoint.com/:b:/g/personal/ivan_vr_tecmilenio_mx/IQAjYNKotqU6TbOO8t76-IspAZGFT7ByHyYdEZWosINrEW4?e=gURUL2" },
+  { id: 5, name: "Plan B", image: "/images/planb.jpg", pdfUrl: "https://utmedu-my.sharepoint.com/:b:/g/personal/ivan_vr_tecmilenio_mx/IQDUh2nZKgBwQYRzSRwsSWX6AQ3D2s53O3-cF0SHx-3KcaI?e=aVs99E" }
 ];
 
 // --- DATOS DE TALLERISTAS ---
@@ -30,9 +29,7 @@ const FACILITATORS = [
   { id: 10, name: "Betsy Soto", image: "/images/10.jpg", instagram: "https://instagram.com/b_soju" },
   { id: 11, name: "Luis Núñez", image: "/images/11.jpg", instagram: "https://instagram.com/xhila_out" },
   { id: 12, name: "Erick Pando", image: "/images/12.jpg", instagram: "https://instagram.com/pando.06" },
-  { id: 13, name: "María Fernanda", image: "/images/13.jpg", instagram: "https://instagram.com/usuario13" },
-  { id: 14, name: "¿?", image: "/images/14.jpg", instagram: "https://instagram.com/usuario14" },
-
+  { id: 13, name: "María Fernanda", image: "/images/13.jpg", instagram: "" }
 ];
 
 export default function Home() {

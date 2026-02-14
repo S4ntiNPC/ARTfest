@@ -133,7 +133,7 @@ export default function Home() {
                 animate={{ opacity: 1, scale: 1 }}
                 className="grid grid-cols-2 gap-4 pb-20"
             >
-                 <div className="col-span-2 border-l-4 border-blue-500 pl-4 mb-4">
+                 <div className="col-span-2 border-l-4 border-purple-500 pl-4 mb-4">
                     <h2 className="text-xl font-bold uppercase tracking-wide">Talleristas</h2>
                     <p className="text-zinc-400 text-sm">Conoce a los expertos del festival.</p>
                 </div>
@@ -196,7 +196,7 @@ export default function Home() {
         {/* VISTA 3: COMIDA */}
         {currentView === 'food' && (
              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-20">
-                  <div className="col-span-1 md:col-span-2 border-l-4 border-purple-600 pl-4 mb-2">
+                  <div className="col-span-1 md:col-span-2 border-l-4 border-blue-600 pl-4 mb-2">
                     <h2 className="text-xl font-bold uppercase tracking-wide">Menú Digital</h2>
                     <p className="text-zinc-400 text-sm">Selecciona tu ubicación para ver opciones.</p>
                 </div>

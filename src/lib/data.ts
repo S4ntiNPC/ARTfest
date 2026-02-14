@@ -242,8 +242,8 @@ export const SCHEDULE: FestivalEvent[] = [
         trackName: 'Fotografía',
         trackColor: '#0f2594', // Green
         events: [
-          { id: 'f16_tras', title: 'División - Quinta Gameros', startTime: '10:30', endTime: '11:00', day: '16', type: 'general', venue: VENUES.casaSebastian },
-          { id: 'f16_tall1', title: 'Masterclass Natgeo Explorer', startTime: '11:00', endTime: '14:00', day: '16', type: 'taller', venue: VENUES.casaSebastian },
+          { id: 'f16_tras', title: 'División - Quinta Gameros', startTime: '10:30', endTime: '11:00', day: '16', type: 'general', venue: VENUES.quintaGameros },
+          { id: 'f16_tall1', title: 'Masterclass Natgeo Explorer', startTime: '11:00', endTime: '14:00', day: '16', type: 'taller', venue: VENUES.quintaGameros },
           { id: 'f16_food', title: 'Comida', startTime: '14:00', endTime: '15:00', day: '16', type: 'comida' },
           { id: 'f16_tall2', title: 'Taller', startTime: '15:00', endTime: '17:00', day: '16', type: 'taller', venue: VENUES.casaSebastian },
         ]
@@ -423,7 +423,7 @@ export const SCHEDULE: FestivalEvent[] = [
     id: '18_llegada',
     title: 'Llegada a Teatro',
     day: '18',
-    startTime: '09:30',
+    startTime: '09:00',
     endTime: '10:00',
     type: 'general',
     venue: VENUES.teatroCiudad,

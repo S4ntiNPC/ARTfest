@@ -20,16 +20,12 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`${inter.className} bg-black text-white antialiased m-0 p-0`}>
-        
-        {/* CORRECCIÓN: Eliminé className="pt-16" de este div */}
         <div className="w-full"> 
            <AlertBanner />
            <main className="min-h-screen">
              {children}
            </main>
         </div>
-
-        {/* El Footer siempre visible abajo */}
         <Footer />
       </body>
     </html>

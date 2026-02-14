@@ -26,7 +26,7 @@ export interface FestivalEvent {
   type: EventType;
   venue?: Venue;
   facilitator?: Facilitator;
-  trackColor?: string;  // Opcional: Para el color de fondo personalizado (hex)
+  trackColor?: string;  
   hideTime?: boolean;   
   isFullWidth?: boolean; 
   // Propiedad para bloques con rutas (Tracks)
@@ -166,7 +166,7 @@ export const SCHEDULE: FestivalEvent[] = [
     venue: VENUES.teatroCiudad,
   },
 
-  // --- TRACKS DÍA 16 (DIVISIÓN MASIVA) ---
+  // --- TRACKS DÍA 16 ---
   {
     id: '16_division_disciplinas',
     title: 'División por Disciplina',
@@ -450,7 +450,7 @@ export const SCHEDULE: FestivalEvent[] = [
     id: '18_gracias',
     title: 'Gracias por vivir el arte en todas sus expresiones.\n¡Nos vemos en la próxima edición de ARTFEST!',
     day: '18',
-    startTime: '14:00', // Mantenlo para que se ordene al final de la lista
+    startTime: '14:00', 
     endTime: '14:30',
     type: 'general',
     trackColor: '#5f4e22', 

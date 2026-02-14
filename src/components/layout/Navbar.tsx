@@ -1,4 +1,4 @@
-'use client'; // Necesario porque usaremos animaciones y estado en el futuro
+'use client'; 
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';

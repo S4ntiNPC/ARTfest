@@ -20,16 +20,19 @@ const FOOD_LOCATIONS = [
 const FACILITATORS = [
   { id: 2, name: "Claudia Zapata", image: "/images/2.jpg", instagram: "https://www.instagram.com/claudiazappata/" },
   { id: 3, name: "Jasset", image: "/images/3.jpg", instagram: "https://instagram.com/jassetvocalcoach/" },
+  { id: 16, name: "Flor Areli Chavira", image: "/images/16.jpg"},
   { id: 4, name: "Aris Carcaño", image: "/images/4.jpg", instagram: "https://instagram.com/aris_carcano" },
-  { id: 5, name: "Yuridia Otero", image: "/images/5.jpg", instagram: "" },
+  { id: 5, name: "Yuridia Otero", image: "/images/5.jpg"},
   { id: 6, name: "Adrian Gutierrez", image: "/images/6.jpg", instagram: "https://instagram.com/pasttensefilms" },
   { id: 7, name: "Alan Torres", image: "/images/7.jpg", instagram: "https://instagram.com/alan_torres15" },
   { id: 8, name: "Emilio Espino", image: "/images/8.jpg", instagram: "https://instagram.com/el.ems" },
   { id: 9, name: "Armando Vega", image: "/images/9.jpg", instagram: "https://instagram.com/armandovega.photo" },
-  { id: 10, name: "Betsy Soto", image: "/images/10.jpg", instagram: "https://instagram.com/b_soju" },
+  { id: 10, name: "Betzy Soto", image: "/images/10.jpg", instagram: "https://instagram.com/b_soju" },
   { id: 11, name: "Luis Núñez", image: "/images/11.jpg", instagram: "https://instagram.com/xhila_out" },
   { id: 12, name: "Erick Pando", image: "/images/12.jpg", instagram: "https://instagram.com/pando.06" },
-  { id: 13, name: "María Fernanda", image: "/images/13.jpg", instagram: "" }
+  { id: 13, name: "Fernanda Palomares", image: "/images/13.jpg", instagram: "https://instagram.com/ferninja_" },
+  { id: 14, name: "Lily Molina", image: "/images/14.jpg"},
+  { id: 15, name: "Daniel", image: "/images/15.jpg"}
 ];
 
 export default function Home() {
@@ -138,44 +141,64 @@ export default function Home() {
                     <p className="text-zinc-400 text-sm">Conoce a los expertos del festival.</p>
                 </div>
 
-                {FACILITATORS.map((person) => (
-                    <a 
-                        key={person.id} 
-                        href={person.instagram} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="group relative block overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900 hover:border-blue-500 transition-all duration-300"
-                    >
-                        {/* CAMBIO CLAVE: aspect-[3/4] es formato vertical (flyer) */}
-                        <div className="relative aspect-[3/4] w-full overflow-hidden bg-zinc-800">
-                             <Image 
-                                src={person.image} 
-                                alt={person.name}
-                                fill
-                                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                                sizes="(max-width: 768px) 50vw, 33vw"
-                             />
-                             {/* Gradiente sutil abajo */}
-                             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
-                        </div>
+                {FACILITATORS.map((person) => {
+                    // 1. Detectamos si existe el link
+                    const hasInstagram = Boolean(person.instagram);
+                    
+                    // 2. Definimos dinámicamente la etiqueta: 'a' si es link, 'div' si es solo tarjeta
+                    const CardTag = hasInstagram ? 'a' : 'div';
 
-                        <div className="absolute bottom-0 left-0 right-0 p-3">
-                             <h3 className="text-sm font-bold text-white leading-tight mb-1">{person.name}</h3>
-                             <div className="flex items-center gap-1 text-xs text-blue-400 font-medium">
-                                <Instagram className="w-3 h-3" /> 
-                                <span>Ver perfil</span>
-                             </div>
-                        </div>
-                    </a>
-                ))}
+                    return (
+                        <CardTag 
+                            key={person.id} 
+                            // 3. Pasamos propiedades de enlace SOLO si tiene Instagram
+                            href={hasInstagram ? person.instagram : undefined}
+                            target={hasInstagram ? "_blank" : undefined}
+                            rel={hasInstagram ? "noopener noreferrer" : undefined}
+                            
+                            // 4. Clases condicionales (Solo agregamos 'group', 'hover' y 'cursor-pointer' si hay link)
+                            className={clsx(
+                                "relative block overflow-hidden rounded-xl border bg-zinc-900 transition-all duration-300",
+                                hasInstagram 
+                                    ? "group hover:border-blue-500 cursor-pointer border-zinc-800" 
+                                    : "border-zinc-800/50" // Borde más sutil si no es interactivo
+                            )}
+                        >
+                            <div className="relative aspect-[3/4] w-full overflow-hidden bg-zinc-800">
+                                    <Image 
+                                    src={person.image} 
+                                    alt={person.name}
+                                    fill
+                                    className={clsx(
+                                        "object-cover transition-transform duration-500",
+                                        // Solo hacemos Zoom en la foto si es un enlace interactivo
+                                        hasInstagram ? "group-hover:scale-105" : ""
+                                    )}
+                                    sizes="(max-width: 768px) 50vw, 33vw"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
+                            </div>
+
+                            <div className="absolute bottom-0 left-0 right-0 p-3">
+                                    <h3 className="text-sm font-bold text-white leading-tight mb-1">{person.name}</h3>
+                                    
+                                    {/* 5. Solo mostramos el texto 'Ver perfil' si tiene Instagram */}
+                                    {hasInstagram && (
+                                        <div className="flex items-center gap-1 text-xs text-blue-400 font-medium">
+                                            <Instagram className="w-3 h-3" /> 
+                                            <span>Ver perfil</span>
+                                        </div>
+                                    )}
+                            </div>
+                        </CardTag>
+                    );
+                })}
             </motion.div>
         )}
 
         {/* VISTA 3: COMIDA */}
         {currentView === 'food' && (
-             /* ... TU CÓDIGO DE COMIDA EXISTENTE ... */
              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-20">
-                {/* ... map de FOOD_LOCATIONS ... */}
                   <div className="col-span-1 md:col-span-2 border-l-4 border-purple-600 pl-4 mb-2">
                     <h2 className="text-xl font-bold uppercase tracking-wide">Menú Digital</h2>
                     <p className="text-zinc-400 text-sm">Selecciona tu ubicación para ver opciones.</p>
@@ -276,7 +299,7 @@ const EventCard = ({ event, isSmall }: { event: FestivalEvent, isSmall?: boolean
   );
 };
 
-// --- COMPONENTE: TRACK SELECTOR (Sin cambios mayores, solo cosméticos) ---
+// --- COMPONENTE: TRACK SELECTOR ---
 const TrackSelector = ({ event }: { event: FestivalEvent }) => {
   const [activeTrackIndex, setActiveTrackIndex] = useState<number | null>(null);
 

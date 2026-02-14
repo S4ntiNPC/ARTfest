@@ -245,7 +245,7 @@ export const SCHEDULE: FestivalEvent[] = [
           { id: 'f16_tras', title: 'División - Quinta Gameros', startTime: '10:30', endTime: '11:00', day: '16', type: 'general', venue: VENUES.quintaGameros },
           { id: 'f16_tall1', title: 'Masterclass Natgeo Explorer', startTime: '11:00', endTime: '14:00', day: '16', type: 'taller', venue: VENUES.quintaGameros },
           { id: 'f16_food', title: 'Comida', startTime: '14:00', endTime: '15:00', day: '16', type: 'comida' },
-          { id: 'f16_tall2', title: 'Taller', startTime: '15:00', endTime: '17:00', day: '16', type: 'taller', venue: VENUES.casaSebastian },
+          { id: 'f16_tall2', title: 'Taller', startTime: '15:00', endTime: '17:00', day: '16', type: 'taller', venue: VENUES.quintaGameros },
         ]
       }
 

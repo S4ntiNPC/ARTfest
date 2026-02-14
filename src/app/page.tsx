@@ -37,7 +37,7 @@ const FACILITATORS = [
 
 export default function Home() {
   const [selectedDay, setSelectedDay] = useState<'15'|'16'|'17'|'18'>('15');
-  // 1. AHORA TENEMOS 3 ESTADOS POSIBLES
+
   const [currentView, setCurrentView] = useState<'agenda' | 'food' | 'workshops'>('agenda');
 
   const filteredEvents = SCHEDULE.filter(event => event.day === selectedDay);
@@ -48,7 +48,7 @@ export default function Home() {
       {/* --- HEADER --- */}
       <section className="sticky top-0 z-40 bg-black/95 backdrop-blur-md pb-4 pt-2 px-4 mb-6 border-b border-white/5 shadow-sm shadow-black/20">
         
-        {/* LOGO (Igual que antes) */}
+        {/* LOGO */}
         <div className="flex justify-center mb-4">
           <div className="relative h-16 w-48 transition-transform hover:scale-105">
             <Image src="/logo.png" alt="ARTfest Logo" fill className="object-contain" priority />
@@ -70,7 +70,7 @@ export default function Home() {
                 onClick={() => setCurrentView('workshops')}
                 className={clsx(
                     "flex items-center justify-center gap-2 py-2 rounded-lg text-xs font-bold transition-all",
-                    currentView === 'workshops' ? "bg-blue-900/40 text-blue-200 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300"
+                    currentView === 'workshops' ? "bg-purple-900/40 text-purple-200 border border-purple-500/30" : "text-zinc-500 hover:text-zinc-300"
                 )}
             >
                 <Users className="w-4 h-4" /> Talleristas
@@ -79,7 +79,7 @@ export default function Home() {
                 onClick={() => setCurrentView('food')}
                 className={clsx(
                     "flex items-center justify-center gap-2 py-2 rounded-lg text-xs font-bold transition-all",
-                    currentView === 'food' ? "bg-purple-900/40 text-purple-200 border border-purple-500/30" : "text-zinc-500 hover:text-zinc-300"
+                    currentView === 'food' ? "bg-blue-900/40 text-blue-200 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300"
                 )}
             >
                 <Utensils className="w-4 h-4" /> Comida
@@ -98,7 +98,6 @@ export default function Home() {
                         Agenda <span className="text-purple-500">2026</span>
                         </h1>
                     </div>
-                    {/* ... (tu código de botones de días sigue igual aquí) ... */}
                     <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
                     {(['15', '16', '17', '18'] as const).map((day) => (
                         <button key={day} onClick={() => setSelectedDay(day)} className={clsx("flex-shrink-0 rounded-full px-6 py-2 text-sm font-bold transition-all active:scale-95 border", selectedDay === day ? "bg-white text-black border-white scale-105 shadow-lg shadow-white/10" : "bg-zinc-900 text-zinc-400 border-zinc-800 hover:bg-zinc-800")}>
@@ -116,9 +115,7 @@ export default function Home() {
         
         {/* VISTA 1: AGENDA */}
         {currentView === 'agenda' && (
-           /* ... TU CÓDIGO DE AGENDA EXISTENTE ... */
            <div className="space-y-4">
-               {/* Pega aquí tu bloque de map filteredEvents... */}
                <AnimatePresence mode='popLayout'>
                 {filteredEvents.map((event) => (
                     <motion.div key={event.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
@@ -129,7 +126,7 @@ export default function Home() {
            </div>
         )}
 
-        {/* VISTA 2: TALLERISTAS (NUEVA) */}
+        {/* VISTA 2: TALLERISTAS */}
         {currentView === 'workshops' && (
             <motion.div 
                 initial={{ opacity: 0, scale: 0.95 }} 
@@ -156,12 +153,12 @@ export default function Home() {
                             target={hasInstagram ? "_blank" : undefined}
                             rel={hasInstagram ? "noopener noreferrer" : undefined}
                             
-                            // 4. Clases condicionales (Solo agregamos 'group', 'hover' y 'cursor-pointer' si hay link)
+                            // 4. Clases condicionales 
                             className={clsx(
                                 "relative block overflow-hidden rounded-xl border bg-zinc-900 transition-all duration-300",
                                 hasInstagram 
                                     ? "group hover:border-blue-500 cursor-pointer border-zinc-800" 
-                                    : "border-zinc-800/50" // Borde más sutil si no es interactivo
+                                    : "border-zinc-800/50"
                             )}
                         >
                             <div className="relative aspect-[3/4] w-full overflow-hidden bg-zinc-800">
@@ -223,9 +220,9 @@ export default function Home() {
   );
 }
 
-// --- COMPONENTE: TARJETA DE EVENTO (Modificada) ---
+// --- COMPONENTE: TARJETA DE EVENTO ---
 const EventCard = ({ event, isSmall }: { event: FestivalEvent, isSmall?: boolean }) => {
-  // 1. Extraemos las propiedades nuevas (asegúrate de que tu type FestivalEvent las soporte o usa 'as any' temporalmente)
+  // 1. Extraemos las propiedades nuevas
   const { hideTime, trackColor } = event;
   // Mapa de colores base (fallback)
   const colorMap = {

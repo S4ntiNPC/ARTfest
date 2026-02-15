@@ -32,7 +32,7 @@ const FACILITATORS = [
   { id: 12, name: "Erick Pando", image: "/images/12.jpg", instagram: "https://instagram.com/pando.06" },
   { id: 13, name: "Fernanda Palomares", image: "/images/13.jpg", instagram: "https://instagram.com/ferninja_" },
   { id: 14, name: "Lily Molina", image: "/images/14.jpg"},
-  { id: 15, name: "Daniel", image: "/images/15.jpg"}
+  { id: 15, name: "Daniel", image: "/images/15.jpg", instagram: "https://instagram.com/dn_divisiondelnorte" },
 ];
 
 export default function Home() {

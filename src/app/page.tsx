@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Analytics } from "@vercel/analytics/next"
 import Image from 'next/image';
 import { SCHEDULE, FestivalEvent } from '@/lib/data';
 import { MapPin, Clock, ChevronDown, ChevronUp, Utensils, ArrowLeft, Calendar, Users, Instagram } from 'lucide-react';

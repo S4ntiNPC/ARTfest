@@ -322,7 +322,7 @@ export const SCHEDULE: FestivalEvent[] = [
           { id: 'c17_br', title: 'Break', startTime: '10:30', endTime: '11:00', day: '17', type: 'general' },
           { id: 'c17_tall', title: 'Taller: Expresión Escénica', startTime: '11:00', endTime: '14:00', day: '17', type: 'taller', venue: VENUES.campusChihuahua },
           { id: 'c17_co', title: 'Comida', startTime: '14:00', endTime: '15:00', day: '17', type: 'comida' },
-          { id: 'c17_ens', title: 'Ensayo General (Finalistas)', startTime: '15:00', endTime: '17:00', day: '17', type: 'general' },
+          { id: 'c17_ens', title: 'Taller', startTime: '15:00', endTime: '17:00', day: '17', type: 'taller', venue: VENUES.campusChihuahua }
         ]
       },
       // --- ENSAMBLE ---
@@ -334,7 +334,6 @@ export const SCHEDULE: FestivalEvent[] = [
           { id: 'e17_tras', title: 'Traslado a Plan B', startTime: '10:30', endTime: '11:00', day: '17', type: 'general' },
           { id: 'e17_tall1', title: 'Taller', startTime: '11:00', endTime: '14:00', day: '17', type: 'taller', venue: VENUES.planB },
           { id: 'e17_co', title: 'Comida', startTime: '14:00', endTime: '15:00', day: '17', type: 'comida' },
-          { id: 'e17_ens', title: 'Ensayo General (Finalistas)', startTime: '15:00', endTime: '17:00', day: '17', type: 'general' },
           { id: 'e17_tall2', title: 'Taller', startTime: '15:00', endTime: '17:00', day: '17', type: 'taller', venue: VENUES.planB },
         ]
       },

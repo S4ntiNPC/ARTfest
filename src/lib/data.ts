@@ -348,7 +348,7 @@ export const SCHEDULE: FestivalEvent[] = [
           { id: 'd17_eli', title: 'Eliminatoria Danza', startTime: '11:00', endTime: '14:00', day: '17', type: 'seleccion', venue: VENUES.teatroCiudad },
           { id: 'd17_co', title: 'Comida', startTime: '14:00', endTime: '15:00', day: '17', type: 'comida' },
           { id: 'd17_tra', title: 'Traslado (Excepto Finalistas)', startTime: '14:30', endTime: '15:00', day: '17', type: 'general', venue: VENUES.teatroCiudad },
-          { id: 'd17_t2', title: 'Taller: Danza Contemporánea (Excepto Finalistas)', startTime: '15:00', endTime: '17:00', day: '17', type: 'taller', venue: VENUES.qualityInn },
+          { id: 'd17_t2', title: 'Taller: Danza Contemporánea (Excepto Finalistas)', startTime: '15:00', endTime: '17:00', day: '17', type: 'taller', venue: VENUES.campusChihuahua },
           { id: 'd17_ens', title: 'Ensayo General (Finalistas)', startTime: '15:00', endTime: '17:00', day: '17', type: 'general', venue: VENUES.teatroCiudad },
         ]
       },
